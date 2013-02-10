@@ -124,13 +124,13 @@ namespace XpScreensaverClone
         {
             if (!isPreviewMode)
             {
-                imageLocation = new Point(random.Next(Size.Width - Resources.OitLogo.Size.Width),
-                    random.Next(Size.Height - Resources.OitLogo.Size.Height));
+                imageLocation = new Point(random.Next(Size.Width - Resources.OitLogo.Size.Width + 1),
+                    random.Next(Size.Height - Resources.OitLogo.Size.Height + 1));
             }
             else
             {
-                imageLocation = new Point(random.Next(Size.Width - 32),
-                    random.Next(Size.Height - 32));
+                imageLocation = new Point(random.Next(Size.Width - 32 + 1),
+                    random.Next(Size.Height - 32 + 1));
             }
         }
 
