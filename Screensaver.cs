@@ -8,16 +8,16 @@ namespace XpScreensaverClone
     public class Screensaver : Form
     {
         [DllImport("user32.dll")]
-        static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
+        private static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
 
         [DllImport("user32.dll")]
-        static extern int SetWindowLong(IntPtr hWnd, int nIndex, IntPtr dwNewLong);
+        private static extern int SetWindowLong(IntPtr hWnd, int nIndex, IntPtr dwNewLong);
 
         [DllImport("user32.dll", SetLastError = true)]
-        static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+        private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
 
         [DllImport("user32.dll")]
-        static extern bool GetClientRect(IntPtr hWnd, out Rectangle lpRect);
+        private static extern bool GetClientRect(IntPtr hWnd, out Rectangle lpRect);
 
         private Timer timer;
 
@@ -53,12 +53,13 @@ namespace XpScreensaverClone
                 Size = parentRect.Size;
                 isPreviewMode = true;
             }
-            Paint += new PaintEventHandler(OnPaint);
 
             originalMouseLocation = new Point(-1, -1);
 
             random = new Random();
             NextImageLocation();
+
+            Paint += new PaintEventHandler(OnPaint);
 
             timer = new Timer();
             timer.Interval = 10000;
@@ -145,7 +146,8 @@ namespace XpScreensaverClone
                         previewWindowHandle = new IntPtr(long.Parse(args[1].Trim()));
                         break;
                     case "/c":
-                        MessageBox.Show("ラ・ヨダソウ・スティアーナ", "それが世界の選択か");
+                        MessageBox.Show("このスクリーン セーバーには、設定できるオプションはありません。",
+                            "何かのロゴ スクリーン セーバー", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     default:
                         previewWindowHandle = IntPtr.Zero;
