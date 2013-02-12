@@ -135,6 +135,7 @@ namespace XpScreensaverClone
             }
         }
 
+        [STAThread]
         public static void Main(string[] args)
         {
             IntPtr previewWindowHandle;
